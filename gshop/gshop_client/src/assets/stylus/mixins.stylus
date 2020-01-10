@@ -1,0 +1,67 @@
+$bb1-color = #f1f1f1
+$green = #02a774
+$yellow = #f5a100
+$bc = #e4e4e4
+
+
+// 一像素下边框
+bottom-border-1px($color) {
+    position: relative;
+    border: none;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        transform: scaleY(0.5);
+        background-color: $color;
+    }
+}
+
+//一像素上边框
+top-border-1px($color)
+  position: relative
+  border: none 
+  &::before
+    content: ''
+    position absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 1px
+    background-color: $color
+
+//根据像素比缩放1px像素边框
+@media only screen and (-webkit-device-pixel-ratio: 2)
+  .border-1px
+    &::before
+      transform: scaleY(.5)
+
+@media only screen and (-webkit-device-pixel-ratio: 3)
+  .border-1px
+    &::before
+      transform: scaleY(.33333)
+
+
+//flex布局 水平排列 中心对齐
+.flex_space_between_nowrap 
+  display: flex
+  justify-content: space-between
+  flex-wrap: nowrap
+  align-items: center
+
+//去除浮动（正常浏览器清楚浮动）
+.clear_float::after {
+  content: ''
+  height: 0
+  visibility: hidden
+  display: block
+  clear: both
+  
+}
+.clear_float {
+  *zoom: 1 /* zoom:1;就是ie6清除浮动的方式（其他浏览器不能识别） 是指ie7以下版本识别（其他正常浏览器看到*就不往下读了，不解析这句） */
+}

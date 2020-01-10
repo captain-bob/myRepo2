@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
-    <FooterGuide></FooterGuide>
+    <FooterGuide v-if="$route.meta.showBottom"></FooterGuide>
   </div>
 </template>
 
@@ -25,6 +25,7 @@ export default {
   margin-top: 60px; */
   width : 100%;
   height : 100%;
-  background : #f5f5f5;
+  background : #fff;               
+  
 }
 </style>
