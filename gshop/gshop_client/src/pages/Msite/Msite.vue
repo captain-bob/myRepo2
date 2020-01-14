@@ -103,6 +103,8 @@ import "swiper/css/swiper.min.css";
 import HeaderTop from "../../components/TopHeader/TopHeader";
 import ShopList from "@/components/ShopList/ShopList";
 
+import {reqShoplist} from '../../api/index'
+
 export default {
   components: {
     HeaderTop,
@@ -124,6 +126,11 @@ export default {
     new BScroll(".msite_content_wrapper", {
       click: true
     });
+    reqShoplist().then(res => {
+      console.log(res)
+    }).catch(err =>{
+      console.log(err)
+    })
   }
 };
 </script>
