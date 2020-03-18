@@ -12,11 +12,13 @@ export default function ajax(url,data = {},type = 'GET') {
             // 准备url参数数据
             let dataurl = '' //数据拼接字符串
             Object.keys(data).forEach(item => {
-                dataurl = item + '=' + data[item] +'&';
+                dataurl += item + '=' + data[item] +'&';
+                // debugger
             })
             if(dataurl!=='') {
                 dataurl = dataurl.substring(0,dataurl.lastIndexOf('&'));
                 url = url + '?' +dataurl
+                
             }
             //发送get请求
             promise = axios.get(url)

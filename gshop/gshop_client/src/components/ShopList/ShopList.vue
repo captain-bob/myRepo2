@@ -8,7 +8,7 @@
         </div>
         <div class="shop_li_right">
           <div class="shop_detail_header">
-            <h4 class="shop_title">锄禾日当午</h4>
+            <h4 class="shop_title">{{shopdata.name}}</h4>
             <ul class="shop_detail_ul">
               <li class="supports">保</li>
               <li class="supports">准</li>
@@ -41,7 +41,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props:{
+    shopdata:Object
+  }
+};
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

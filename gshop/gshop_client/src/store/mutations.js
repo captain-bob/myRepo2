@@ -11,6 +11,8 @@ import {
 export default {
   [RECEIVE_ADDRESS](state,{address}) {
     state.address = address //地址
+    console.log(address)
+    console.log(state)
   },
   [RECEIVE_CATEGORYS](state,{categorys}) {
     state.categorys = categorys //食品分类
