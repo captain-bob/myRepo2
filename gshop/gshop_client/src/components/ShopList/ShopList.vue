@@ -18,7 +18,7 @@
           <div class="shop_rating_order flex_space_between_nowrap">
             <!-- 五星好评组件 -->
             <div class="shop_rating_order_left">
-              <div class="star"></div>
+              <Star :score=3.9></Star>
               <span class="rating_span">3.6</span>
               <span class="order_span">月售106单</span>
             </div>
@@ -41,7 +41,13 @@
 </template>
 
 <script>
+
+import Star from "@/components/star/star";
+
 export default {
+  components: {
+    Star
+  },
   props:{
     shopdata:Object
   }

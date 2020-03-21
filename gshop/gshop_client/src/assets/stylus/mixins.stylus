@@ -65,3 +65,9 @@ top-border-1px($color)
 .clear_float {
   *zoom: 1 /* zoom:1;就是ie6清除浮动的方式（其他浏览器不能识别） 是指ie7以下版本识别（其他正常浏览器看到*就不往下读了，不解析这句） */
 }
+
+//根据像素比来选择2x图和3X图
+bg-image($url)
+  background-image: url($url+"@2x.png")
+  @media (-webkit-min-device-pixel-ratio:3),(min-device-pixel-ratio:3)
+    background-image: url($url+"@3x.png")
