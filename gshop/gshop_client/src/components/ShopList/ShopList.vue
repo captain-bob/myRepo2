@@ -10,28 +10,26 @@
           <div class="shop_detail_header">
             <h4 class="shop_title">{{shopdata.name}}</h4>
             <ul class="shop_detail_ul">
-              <li class="supports">保</li>
-              <li class="supports">准</li>
-              <li class="supports">票</li>
+              <li class="supports" v-for="(item,index) in shopdata.supports" :key="index">{{item.icon_name}}</li>
             </ul>
           </div>
           <div class="shop_rating_order flex_space_between_nowrap">
-            <!-- 五星好评组件 -->
+            
             <div class="shop_rating_order_left">
-              <Star :score=3.9></Star>
-              <span class="rating_span">3.6</span>
-              <span class="order_span">月售106单</span>
+              <Star :score=shopdata.rating></Star>  <!-- 五星好评组件 -->
+              <span class="rating_span">{{shopdata.rating}}</span>
+              <span class="order_span">月售{{shopdata.recent_order_num}}单</span>
             </div>
             <div class="shop_rating_oder_right">
-              <span class="delivery_style delivery_left">硅谷转送</span>
-              <span class="delivery_style delivery_right">准时达</span>
+              <span class="delivery_style delivery_left">{{shopdata.delivery_mode.text}}</span>
+              <!-- <span class="delivery_style delivery_right">准时达</span> -->
             </div>
           </div>
           <div class="shop_distance">
             <p class="shop_delivery_msg">
-              <span>¥20起送</span>
+              <span>¥{{shopdata.float_minimum_order_amount}}起送</span>
               <span class="segmentation">/</span>
-              <span>配送费¥5</span>
+              <span>配送费¥{{shopdata.float_delivery_fee}}</span>
             </p>
           </div>
         </div>
