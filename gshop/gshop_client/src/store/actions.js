@@ -8,7 +8,7 @@ import {
     RECEIVE_SHOPLIST
 } from './mutation-types'
 
-import { reqAddress, reqcategory,reqshoplist } from '../api/index'
+import { reqAddress, reqcategory,reqshoplist,reqverificationcode } from '../api/index'
 
 export default {
 
@@ -51,5 +51,21 @@ export default {
             console.log(shoplist)
             commit(RECEIVE_SHOPLIST, { shoplist })
         }
-    }
+    },
+
+    // //异步获取手机验证码
+    // async getverificationcode({ commit, state}) {
+    //     // 发送异步ajax请求
+    //     const dat={}
+    //     dat.latitude=state.latitude
+    //     dat.longitude=state.longitude
+        
+    //     const response = await reqshoplist(dat)
+    //     //提交一个mutation
+    //     if (response.code === 0) {
+    //         const shoplist = response.data
+    //         console.log(shoplist)
+    //         commit(RECEIVE_SHOPLIST, { shoplist })
+    //     }
+    // }
 }
