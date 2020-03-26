@@ -34,6 +34,7 @@
                   </section>
                   <section class="login_content_input">
                     <input type="text" placeholder="验证码" v-model="password_login_code">
+                    <img class="input_right graph_code" src="http://localhost:4000/captcha"/>
                   </section>
                 </div>
                 <button class="login_submit">登录</button>
@@ -154,6 +155,8 @@
             right 10px
             &.get_verification 
               color #333
+            &.graph_code
+              height 45px
             &.switch_button
               width 45px
               border 1px solid #e4e4e4
