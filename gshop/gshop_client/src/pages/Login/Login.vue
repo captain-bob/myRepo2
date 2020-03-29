@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <i class="iconfont iconhoutui" @click="$router.go(-1)"></i>
     <div class="login_wrap">
         <h1 class="login_header">OK</h1>
         <div class="login_content">
@@ -34,10 +35,10 @@
                   </section>
                   <section class="login_content_input">
                     <input type="text" placeholder="验证码" v-model="password_login_code">
-                    <img class="input_right graph_code" src="http://localhost:4000/captcha"/>
+                    <img class="input_right graph_code" src="http://localhost:4000/captcha" ref="captcha" @click="getgraphcode"/>
                   </section>
                 </div>
-                <button class="login_submit">登录</button>
+                <button class="login_submit" @click="login">登录</button>
             </div>
             <p class="about_us">关于我们</p>
         </div>
@@ -47,12 +48,12 @@
 
 <script>
 
-  import {reqverificationcode} from '../../api'
+  import {reqpasswordlogin,reqsmscode,reqsmslogin} from '../../api'
   export default {
     data() {
       return {
         switch_buttton_control:true,//控制密码显示
-        showLoginType:true,//控制密码登录和短信验证码登录
+        showLoginType:true,//控制密码登录和短信验证码登录,true为短信登录，false为密码登录
         phoneNum:'',//用户输入手机号
         phone_verification_code:'',//手机验证码
         time:0,//短信验证码发送时间
@@ -72,23 +73,81 @@
 
     methods: {
 
+
       //获取短信验证码
-      getVerification: function() {
-        if(this.rightPhone) {
-          if(!this.time) {
-          this.time = 30
-          var that = this
-          var timer = setInterval(function() {
-            that.time--
-            if(that.time===0) {
-              clearInterval(timer)
+      async getVerification() {
+        var that = this
+        if(that.rightPhone) {
+          if(!that.time) {
+          
+            //发送ajax请求获取短信验证码
+            const result = await reqsmscode(that.phoneNum)
+            if(result.code===0) {
+              that.time = 30
+              var timer = setInterval(function() {
+              that.time--
+              if(that.time===0) {
+                clearInterval(timer)
+              }
+              },1000)
+            }else if(result.code===1) {
+                const msg=result.msg
+                console.log(msg)
+                clearInterval(timer)
             }
-          },1000)
-          // reqverificationcode(that.phoneNum)
-        }
+          }
         }
         
-      }
+      },
+
+      //获取一次性图片验证码
+      getgraphcode() {
+        this.$refs.captcha.src="http://localhost:4000/captcha?time="+Date.now()
+      },
+
+      //登录
+      async login() {
+        let result
+        if(this.showLoginType===true) {
+          
+          //短信登录
+          const {rightPhone,phoneNum,phone_verification_code} = this
+          if(!rightPhone) {
+            console.log('手机号不正确') //这里需要提示框
+            return 
+          }else if(!/^\d{6}$/.test(phone_verification_code)) {
+            console.log('验证码需要六位')
+            return
+          }
+          result = await reqsmslogin(phoneNum,phone_verification_code)
+          
+        }else if(this.showLoginType===false) {
+          //密码登录
+          const {password_login_user,passWord,password_login_code} = this
+          if(!password_login_user) {
+            console.log('用户名不能为空') //这里需要提示框
+            return
+          }else if (!passWord) {
+            console.log('密码不能为空') //这里需要提示框
+            return 
+          }else if (!/^[0-9a-zA-Z]{4}$/.test(password_login_code)) {
+            console.log('输入四位验证码') //这里需要提示框
+            return 
+          }
+
+          result = await reqpasswordlogin({'name':password_login_user,'pwd':passWord,'captcha':password_login_code})
+          
+        }
+        //请求ajax登录后的结果处理
+        if(result.code===0) {
+            //存储用户信息到state
+            this.$store.dispatch('recorduserinfo',result.data)
+            //页面跳转到个人中心页
+            this.$router.replace('/profile')
+          }else if(result.code===1) {
+            console.log(result.msg) //这里需要提示框
+          }
+      },
     },
   }
 </script>
@@ -99,6 +158,12 @@
   width 100%
   height 100%
   overflow hidden
+  .iconhoutui
+    position fixed
+    top 4px
+    font-size 25px
+    left 2px
+    color #999
   .login_wrap
     padding 50px 35px 10px
     .login_header

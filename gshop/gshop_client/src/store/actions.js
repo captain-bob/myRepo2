@@ -5,10 +5,11 @@
 import {
     RECEIVE_ADDRESS,
     RECEIVE_CATEGORYS,
-    RECEIVE_SHOPLIST
+    RECEIVE_SHOPLIST,
+    RECEIVE_USERINFO
 } from './mutation-types'
 
-import { reqAddress, reqcategory,reqshoplist,reqverificationcode } from '../api/index'
+import { reqAddress, reqcategory,reqshoplist } from '../api/index'
 
 export default {
 
@@ -52,6 +53,11 @@ export default {
             commit(RECEIVE_SHOPLIST, { shoplist })
         }
     },
+
+    //同步记录用户信息
+    recorduserinfo({commit},userinfo) {
+        commit(RECEIVE_USERINFO,{userinfo})
+    }
 
     // //异步获取手机验证码
     // async getverificationcode({ commit, state}) {

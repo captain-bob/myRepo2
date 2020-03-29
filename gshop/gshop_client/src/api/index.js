@@ -17,10 +17,17 @@ export const reqcategory = () => ajax(BASE_URL+'/index_category')
 export const reqshoplist = (data) => ajax(BASE_URL+'/shops',data)
 
 // [4、根据经纬度和关键字搜索商铺列表](#4根据经纬度和关键字搜索商铺列表)
+
 // [5、获取一次性验证码](#5获取一次性验证码)
+
 // [6、用户名密码登陆](#6用户名密码登陆)
-export const reqverificationcode = (num) => ajax(BASE_URL+'/sendcode?phone='+num)
+export const reqpasswordlogin = ({name,pwd,captcha}) => ajax(BASE_URL+'/login_pwd',{name,pwd,captcha},'POST')
+
 // [7、发送短信验证码](#7发送短信验证码)
+export const reqsmscode = (phone) => ajax(BASE_URL+'/sendcode',{phone})
+
 // [8、手机号验证码登陆](#8手机号验证码登陆)
+export const reqsmslogin = (phone,code) => ajax(BASE_URL+'/login_sms',{phone,code},'POST')
+
 // [9、根据会话获取用户信息](#9根据会话获取用户信息)
 // [10、用户登出](#10用户登出)

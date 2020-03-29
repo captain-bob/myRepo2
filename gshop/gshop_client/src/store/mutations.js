@@ -5,7 +5,8 @@
 import {
     RECEIVE_ADDRESS,
     RECEIVE_CATEGORYS,
-    RECEIVE_SHOPLIST
+    RECEIVE_SHOPLIST,
+    RECEIVE_USERINFO
 } from './mutation-types'
 
 export default {
@@ -19,5 +20,8 @@ export default {
   },
   [RECEIVE_SHOPLIST](state,{shoplist}) {
     state.shoplist = shoplist //商家列表
+  },
+  [RECEIVE_USERINFO](state,{userinfo}) {
+    state.userinfo = userinfo //用户信息
   }
 }

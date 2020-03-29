@@ -10,3 +10,6 @@ export const RECEIVE_CATEGORYS = 'receive_categorys'
 
 //获取商家列表
 export const RECEIVE_SHOPLIST = 'receive_shoplist'
+
+//获取用户信息
+export const RECEIVE_USERINFO = 'receive_userinfo'

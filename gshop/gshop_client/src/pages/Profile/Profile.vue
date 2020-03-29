@@ -2,19 +2,19 @@
   <div class="profile">
     <HeaderTop title="我的"></HeaderTop>
     <div class="profile_content">
-      <div class="profile_content_header flex_space_between_nowrap">
+      <router-link class="profile_content_header flex_space_between_nowrap" :to="userinfo._id?'':'/login'">
         <div class="profile_header_title">
           <i class="iconfont iconlogout-user"></i>
           <div class="header_title_box">
-            <p class="header_login">登录/注册</p>
+            <p class="header_login" v-if="!userinfo.phone">{{userinfo.name||'登录/注册'}}</p>
             <p class="header_shouji">
               <i class="iconfont iconshouji"></i>
-              <span>暂无绑定手机号</span>
+              <span>{{userinfo.phone||'暂无绑定手机号'}}</span>
             </p>
           </div>
         </div>
         <i class="iconfont iconqianjin"></i>
-      </div>
+      </router-link>
       <div class="profile_content_number">
         <ul class="proflie_number_box clear_float">
           <li class="number_item number_item_right_border">
@@ -77,11 +77,16 @@
 
 <script>
 import HeaderTop from "../../components/TopHeader/TopHeader";
+import {mapState} from 'vuex'
+
 export default {
   name: "profile",
   components: {
     HeaderTop
-  }
+  },
+  computed: {
+    ...mapState(['userinfo'])
+  },
 };
 </script>
 
