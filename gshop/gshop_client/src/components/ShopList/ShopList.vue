@@ -1,6 +1,6 @@
 /* 商家列表组件 */
 <template>
-  <div class="shop_container">
+  <div class="shop_container" @click="$router.push('/shop')">
     <ul class="shop_list">
       <li class="shop_li">
         <div class="shop_li_left">
