@@ -2,14 +2,14 @@
   <div class="shop">
     <ShopHeader/>
     <div class="shop-nav">
-      <div class="nav-item">
-        <router-link to="" class="item-text pitchon">点餐</router-link>
+      <div class="nav-item" @click="navselect='goods'">
+        <router-link to="/shop/goods" class="item-text" :class="{pitchon:navselect==='goods'}">点餐</router-link>
       </div>
-      <div class="nav-item">
-        <router-link to="" class="item-text">评价</router-link>
+      <div class="nav-item" @click="navselect='rating'">
+        <router-link to="/shop/rating" class="item-text" :class="{pitchon:navselect==='rating'}">评价</router-link>
       </div>
-      <div class="nav-item">
-        <router-link to="" class="item-text">商家</router-link>
+      <div class="nav-item" @click="navselect='info'">
+        <router-link to="/shop/info" class="item-text" :class="{pitchon:navselect==='info'}">商家</router-link>
       </div>
     </div>
     <div class="content">
@@ -23,6 +23,11 @@
 import ShopHeader from '../../components/ShopHeader/ShopHeader.vue'
 
 export default {
+  data() {
+    return {
+      navselect:'goods',//goods显示点餐，rating显示评价页面,info显示商家页面
+    }
+  },
   components:{
     ShopHeader
   }
