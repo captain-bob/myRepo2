@@ -25,12 +25,24 @@ import ShopHeader from '../../components/ShopHeader/ShopHeader.vue'
 export default {
   data() {
     return {
-      navselect:'goods',//goods显示点餐，rating显示评价页面,info显示商家页面
+      navselect:'',//goods显示点餐，rating显示评价页面,info显示商家页面
     }
+  },
+  mounted() {
+    this.toPage()
   },
   components:{
     ShopHeader
-  }
+  },
+  methods: {
+    //初始化页面二级导航
+    toPage() {
+      var name=this.$route.name
+      console.log(name.lastIndexOf('/'))
+      this.navselect=name.slice(1)
+      console.log(name.slice(name.lastIndexOf('/')))
+    }
+  },
 }
 </script>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="rating">
-    <div class="header">
+    <div>
+          <div class="header">
       <div class="header-left">
         <p class="totle-rating-num">4.2</p>
         <p class="totle-rating-title">综合评分</p>
@@ -47,7 +48,7 @@
               <span>2016-07-23 21:52:44</span>
             </p>
             <p class="one-num">
-                <Star></Star>
+                <Star class="star" :score=4.5></Star>
               <span>30</span>
             </p>
             <p class="one-rating">看到的扩啦扩绿多多扩绿绿绿绿绿绿绿绿绿啦奥奥打开来得快代课老师</p>
@@ -57,20 +58,99 @@
               <span>皮蛋瘦肉粥</span>
               <span>扁豆蒙面</span>
               <span>蚂蚁上树</span>
+              <span>蚂蚁上树</span>
+              <span>蚂蚁上树</span>
             </div>
           </div>
         </div>
+        <div class="rating-one">
+          <img class="one-img" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png">
+          <div class="one-content">
+            <p class="one-one">
+              <span>3****c</span>
+              <span>2016-07-23 21:52:44</span>
+            </p>
+            <p class="one-num">
+                <Star class="star" :score=4.5></Star>
+              <span>30</span>
+            </p>
+            <p class="one-rating">看到的扩啦扩绿多多扩绿绿绿绿绿绿绿绿绿啦奥奥打开来得快代课老师</p>
+            <div class="like">
+              <i class="iconfont iconsousuo"></i>
+              <span>南瓜粥</span>
+              <span>皮蛋瘦肉粥</span>
+              <span>扁豆蒙面</span>
+              <span>蚂蚁上树</span>
+              <span>蚂蚁上树</span>
+              <span>蚂蚁上树</span>
+            </div>
+          </div>
+        </div>
+        <div class="rating-one">
+          <img class="one-img" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png">
+          <div class="one-content">
+            <p class="one-one">
+              <span>3****c</span>
+              <span>2016-07-23 21:52:44</span>
+            </p>
+            <p class="one-num">
+                <Star class="star" :score=4.5></Star>
+              <span>30</span>
+            </p>
+            <p class="one-rating">看到的扩啦扩绿多多扩绿绿绿绿绿绿绿绿绿啦奥奥打开来得快代课老师</p>
+            <div class="like">
+              <i class="iconfont iconsousuo"></i>
+              <span>南瓜粥</span>
+              <span>皮蛋瘦肉粥</span>
+              <span>扁豆蒙面</span>
+              <span>蚂蚁上树</span>
+              <span>蚂蚁上树</span>
+              <span>蚂蚁上树</span>
+            </div>
+          </div>
+        </div>
+        <div class="rating-one">
+          <img class="one-img" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png">
+          <div class="one-content">
+            <p class="one-one">
+              <span>3****c</span>
+              <span>2016-07-23 21:52:44</span>
+            </p>
+            <p class="one-num">
+                <Star class="star" :score=4.5></Star>
+              <span>30</span>
+            </p>
+            <p class="one-rating">看到的扩啦扩绿多多扩绿绿绿绿绿绿绿绿绿啦奥奥打开来得快代课老师</p>
+            <div class="like">
+              <i class="iconfont iconsousuo"></i>
+              <span>南瓜粥</span>
+              <span>皮蛋瘦肉粥</span>
+              <span>扁豆蒙面</span>
+              <span>蚂蚁上树</span>
+              <span>蚂蚁上树</span>
+              <span>蚂蚁上树</span>
+            </div>
+          </div>
+        </div>
+
       </div>
+    </div>
     </div>
   </div>
 </template>
 
 <script>
 import Star from '../../../components/star/star'
+import BScroll from 'better-scroll'
 export default {
 components:{
   Star,
-}
+},
+mounted() {
+  new BScroll(".rating",{
+    click:true
+  })
+},
 }
 </script>
 
@@ -78,7 +158,7 @@ components:{
 .rating
   width 100%
   height 100% 
-  overflow hidden
+  // overflow hidden
   .header
     display flex
     padding 17px 0
@@ -139,7 +219,17 @@ components:{
       .rating-one
         padding 17px
         display flex
-        font-size 13px
+        font-size 12px
+        position relative
+        &::after 
+          content ''
+          height 1px
+          width 90%
+          position absolute
+          bottom 0
+          left 50%
+          background-color #F2F2F3
+          transform translateX(-50%)
         .one-img
           width 30px
           height 30px
@@ -156,6 +246,18 @@ components:{
               color #A1A7AC
           .one-num
             margin-bottom 10px
+            .star
+              margin-right 5px
           .one-rating
             line-height 16px
+            margin-bottom 10px
+          .like
+            line-height 22px
+            span 
+              border 1px solid #E5E6E7
+              color #B1B5B9
+              text-align center
+              padding 0 5px
+              margin-right 5px
+              white-space nowrap
 </style>
