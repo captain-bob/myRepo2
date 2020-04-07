@@ -4,17 +4,17 @@
       <div class="delivery">
         <h1>配送信息</h1>
         <p class="p-1">
-          <span class="delivery-title">硅谷配送</span>
-          <span class="delivery-text">有商家配送提供配送，约28分钟送达，距离1000m</span>
+          <span class="delivery-title">{{info.description}}</span>
+          <span class="delivery-text">有商家配送提供配送，约{{info.deliveryTime}}分钟送达，距离{{info.distance}}</span>
         </p>
-        <p class="p-2">配送费￥4</p>
+        <p class="p-2">配送费￥{{info.deliveryPrice}}</p>
       </div>
       <div class="activity">
         <h1>活动与服务</h1>
         <ul>
-          <li v-for="(item,index) in 8" :key="index">
-            <span class="activity-tltle">首单</span>
-            <span class="activty-text">新用户下单立减17元（不与其他活动同享）</span>
+          <li v-for="(item,index) in info.supports" :key="index">
+            <span class="activity-tltle">{{item.name}}</span>
+            <span class="activty-text">{{item.content}}</span>
           </li>
         </ul>
       </div>
@@ -22,11 +22,7 @@
         <h1>商家实景</h1>
         <div class="img">
           <div class="img-container">
-            <img src="https://fuss10.elemecdn.com/3/f2/2a8796ba025a5773fd685a95ac369jpeg.jpeg">
-            <img src="https://fuss10.elemecdn.com/3/f2/2a8796ba025a5773fd685a95ac369jpeg.jpeg">
-            <img src="https://fuss10.elemecdn.com/3/f2/2a8796ba025a5773fd685a95ac369jpeg.jpeg">
-            <img src="https://fuss10.elemecdn.com/3/f2/2a8796ba025a5773fd685a95ac369jpeg.jpeg">
-            <img src="https://fuss10.elemecdn.com/3/f2/2a8796ba025a5773fd685a95ac369jpeg.jpeg">
+            <img :src="item" v-for="(item,index) in info.pics" :key="index">
           </div>
         </div>
       </div>
@@ -34,19 +30,19 @@
         <h1>商家信息</h1>
         <p>
           <span class="info-title">品类</span>
-          <span class="info-text">包子粥店，简餐</span>
+          <span class="info-text">{{info.category}}</span>
         </p>
         <p>
-          <span class="info-title">品类</span>
-          <span class="info-text">包子粥店，简餐</span>
+          <span class="info-title">商家电话</span>
+          <span class="info-text">{{info.phone}}</span>
         </p>
         <p>
-          <span class="info-title">品类</span>
-          <span class="info-text">包子粥店，简餐</span>
+          <span class="info-title">地址</span>
+          <span class="info-text">{{info.address}}</span>
         </p>
         <p>
-          <span class="info-title">品类</span>
-          <span class="info-text">包子粥店，简餐</span>
+          <span class="info-title">营业时间</span>
+          <span class="info-text">{{info.workTime}}</span>
         </p>
       </div>
     </div>
@@ -55,18 +51,21 @@
 
 <script>
 import BScroll from 'better-scroll'
+import {mapState} from 'vuex'
+
 export default {
 mounted() {
   new BScroll('.info',{
     click:true
-  }),
-  // new BScroll('.img',{
-  //   scrollX:true,
-  //   click:true
-  // })
+  })
+
   new BScroll('.img', {
   scrollX: true // 水平滑动
-})
+  })
+
+},
+computed: {
+  ...mapState(['info'])
 },
 }
 </script>

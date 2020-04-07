@@ -31,3 +31,12 @@ export const reqsmslogin = (phone,code) => ajax(BASE_URL+'/login_sms',{phone,cod
 
 // [9、根据会话获取用户信息](#9根据会话获取用户信息)
 // [10、用户登出](#10用户登出)
+
+//[11、获取商家产品信息]
+export const reqshopgoods = () => ajax('/goods')
+
+//[11、获取商家评价信息]
+export const reqshopratings = () => ajax('/ratings')
+
+//[11、获取商家详细信息]
+export const reqshopinfo = () => ajax('/info')

@@ -6,7 +6,10 @@ import {
     RECEIVE_ADDRESS,
     RECEIVE_CATEGORYS,
     RECEIVE_SHOPLIST,
-    RECEIVE_USERINFO
+    RECEIVE_USERINFO,
+    RECEIVE_SHOPGOODS,
+    RECEIVE_SHOPINFO,
+    RECEIVE_SHOPRATINGS
 } from './mutation-types'
 
 export default {
@@ -23,5 +26,15 @@ export default {
   },
   [RECEIVE_USERINFO](state,{userinfo}) {
     state.userinfo = userinfo //用户信息
-  }
+  },
+  [RECEIVE_SHOPGOODS](state,{shopgoods}) {
+    state.goods = shopgoods //商家产品信息
+  },
+  [RECEIVE_SHOPRATINGS](state,{shopratings}) {
+    state.ratings = shopratings //商家评价信息
+    // debugger
+  },
+  [RECEIVE_SHOPINFO](state,{shopinfo}) {
+    state.info = shopinfo //商家详细信息
+  },
 }

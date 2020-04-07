@@ -3,118 +3,26 @@
     <div class="container">
       <div class="left-wraper">
         <ul class="left-content">
-          <li class="pitchon">
-            <span>折扣大大</span>
-          </li>
-          <li v-for="(item,index) in 20" :key="index">
-            <span>折扣大大</span>
+          <li v-for="(item,index) in goods" :key="index" :class="{pitchon:index===1}">
+            <span>{{item.name}}</span>
           </li>
         </ul>
       </div>
       <div class="right-wraper">
         <ul class="right-content">
-          <li class="outer-li">
-            <h1 class="category">优惠</h1>
+          <li class="outer-li" v-for="(goodstype,index) in goods" :key="index">
+            <h1 class="category">{{goodstype.name}}</h1>
             <ul class="inner-ul">
-              <li class="inner-li">
-                <img class="feature-img" src="http://fuss10.elemecdn.com/8/a6/453f65f16b1391942af11511b7a90jpeg.jpeg?imageView2/1/w/114/h/114" alt="">
+              <li class="inner-li" v-for="(food,index) in goodstype.foods" :key="index">
+                <img class="feature-img" :src="food.icon" alt="">
                 <div class="details">
-                  <h1>南瓜粥</h1>
-                  <p class="feature">甜粥</p>
+                  <h1>{{food.name}}</h1>
+                  <p class="feature" v-show="food.description">{{food.description}}</p>
                   <div class="sell">
-                    <span>月售91份</span>
-                    <span>好评100%</span>
+                    <span>月售{{food.sellCount}}份</span>
+                    <span>好评{{food.rating}}%</span>
                   </div>
-                  <p class="price">￥12</p>
-                </div>
-              </li>
-              <li class="inner-li">
-                <img class="feature-img" src="http://fuss10.elemecdn.com/8/a6/453f65f16b1391942af11511b7a90jpeg.jpeg?imageView2/1/w/114/h/114" alt="">
-                <div class="details">
-                  <h1>南瓜粥</h1>
-                  <p class="feature">甜粥</p>
-                  <div class="sell">
-                    <span>月售91份</span>
-                    <span>好评100%</span>
-                  </div>
-                  <p class="price">￥12</p>
-                </div>
-              </li>
-              <li class="inner-li">
-                <img class="feature-img" src="http://fuss10.elemecdn.com/8/a6/453f65f16b1391942af11511b7a90jpeg.jpeg?imageView2/1/w/114/h/114" alt="">
-                <div class="details">
-                  <h1>南瓜粥</h1>
-                  <p class="feature">甜粥</p>
-                  <div class="sell">
-                    <span>月售91份</span>
-                    <span>好评100%</span>
-                  </div>
-                  <p class="price">￥12</p>
-                </div>
-              </li>
-              <li class="inner-li">
-                <img class="feature-img" src="http://fuss10.elemecdn.com/8/a6/453f65f16b1391942af11511b7a90jpeg.jpeg?imageView2/1/w/114/h/114" alt="">
-                <div class="details">
-                  <h1>南瓜粥</h1>
-                  <p class="feature">甜粥</p>
-                  <div class="sell">
-                    <span>月售91份</span>
-                    <span>好评100%</span>
-                  </div>
-                  <p class="price">￥12</p>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li class="outer-li">
-            <h1 class="category">优惠</h1>
-            <ul class="inner-ul">
-              <li class="inner-li">
-                <img class="feature-img" src="http://fuss10.elemecdn.com/8/a6/453f65f16b1391942af11511b7a90jpeg.jpeg?imageView2/1/w/114/h/114" alt="">
-                <div class="details">
-                  <h1>南瓜粥</h1>
-                  <p class="feature">甜粥</p>
-                  <div class="sell">
-                    <span>月售91份</span>
-                    <span>好评100%</span>
-                  </div>
-                  <p class="price">￥12</p>
-                </div>
-              </li>
-              <li class="inner-li">
-                <img class="feature-img" src="http://fuss10.elemecdn.com/8/a6/453f65f16b1391942af11511b7a90jpeg.jpeg?imageView2/1/w/114/h/114" alt="">
-                <div class="details">
-                  <h1>南瓜粥</h1>
-                  <p class="feature">甜粥</p>
-                  <div class="sell">
-                    <span>月售91份</span>
-                    <span>好评100%</span>
-                  </div>
-                  <p class="price">￥12</p>
-                </div>
-              </li>
-              <li class="inner-li">
-                <img class="feature-img" src="http://fuss10.elemecdn.com/8/a6/453f65f16b1391942af11511b7a90jpeg.jpeg?imageView2/1/w/114/h/114" alt="">
-                <div class="details">
-                  <h1>南瓜粥</h1>
-                  <p class="feature">甜粥</p>
-                  <div class="sell">
-                    <span>月售91份</span>
-                    <span>好评100%</span>
-                  </div>
-                  <p class="price">￥12</p>
-                </div>
-              </li>
-              <li class="inner-li">
-                <img class="feature-img" src="http://fuss10.elemecdn.com/8/a6/453f65f16b1391942af11511b7a90jpeg.jpeg?imageView2/1/w/114/h/114" alt="">
-                <div class="details">
-                  <h1>南瓜粥</h1>
-                  <p class="feature">甜粥</p>
-                  <div class="sell">
-                    <span>月售91份</span>
-                    <span>好评100%</span>
-                  </div>
-                  <p class="price">￥12</p>
+                  <p class="price">￥{{food.price}}</p>
                 </div>
               </li>
             </ul>
@@ -139,6 +47,9 @@
 
 <script>
 import BScroll from 'better-scroll'
+import {mapState} from 'vuex'
+
+
 export default {
 mounted() {
     new BScroll(".left-wraper", {
@@ -147,6 +58,10 @@ mounted() {
     new BScroll(".right-wraper", {
       click: true
     });
+    this.$store.dispatch('getshopgoods')
+},
+computed: {
+  ...mapState(['goods'])
 },
 }
 </script>
@@ -228,7 +143,7 @@ mounted() {
             padding-top 3px
           .feature 
             color #B1B5B9
-            padding-top 6px
+            margin-top 6px
           .sell
             color #B1B5B9
             padding-top 6px

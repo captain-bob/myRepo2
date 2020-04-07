@@ -9,7 +9,7 @@
       </div>
       <div class="header-right">
         <div class="service-attitude">
-          <span>服务态度<span class="number">4.1</span></span>
+          <span>服务态度<span class="number">{{info.serviceScore}}</span></span>
         </div>
         <div class="commodity-grade">
           <span>商品评分<span class="number">4.3</span></span>
@@ -40,99 +40,24 @@
         </p>
       </div>
       <div class="rating-one-box">
-        <div class="rating-one">
-          <img class="one-img" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png">
+        <div class="rating-one" v-for="(ratingitem,index) in ratings" :key="index">
+          <img class="one-img" :src="ratingitem.avatar">
           <div class="one-content">
             <p class="one-one">
-              <span>3****c</span>
+              <span>{{ratingitem.username}}</span>
               <span>2016-07-23 21:52:44</span>
             </p>
             <p class="one-num">
-                <Star class="star" :score=4.5></Star>
-              <span>30</span>
+                <Star class="star" :score=ratingitem.score></Star>
+              <span>{{ratingitem.deliveryTime}}</span>
             </p>
-            <p class="one-rating">看到的扩啦扩绿多多扩绿绿绿绿绿绿绿绿绿啦奥奥打开来得快代课老师</p>
+            <p class="one-rating">{{ratingitem.text}}</p>
             <div class="like">
               <i class="iconfont iconsousuo"></i>
-              <span>南瓜粥</span>
-              <span>皮蛋瘦肉粥</span>
-              <span>扁豆蒙面</span>
-              <span>蚂蚁上树</span>
-              <span>蚂蚁上树</span>
-              <span>蚂蚁上树</span>
+              <span v-for="(rec,index) in ratingitem.recommend" :key="index">{{rec}}</span>
             </div>
           </div>
         </div>
-        <div class="rating-one">
-          <img class="one-img" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png">
-          <div class="one-content">
-            <p class="one-one">
-              <span>3****c</span>
-              <span>2016-07-23 21:52:44</span>
-            </p>
-            <p class="one-num">
-                <Star class="star" :score=4.5></Star>
-              <span>30</span>
-            </p>
-            <p class="one-rating">看到的扩啦扩绿多多扩绿绿绿绿绿绿绿绿绿啦奥奥打开来得快代课老师</p>
-            <div class="like">
-              <i class="iconfont iconsousuo"></i>
-              <span>南瓜粥</span>
-              <span>皮蛋瘦肉粥</span>
-              <span>扁豆蒙面</span>
-              <span>蚂蚁上树</span>
-              <span>蚂蚁上树</span>
-              <span>蚂蚁上树</span>
-            </div>
-          </div>
-        </div>
-        <div class="rating-one">
-          <img class="one-img" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png">
-          <div class="one-content">
-            <p class="one-one">
-              <span>3****c</span>
-              <span>2016-07-23 21:52:44</span>
-            </p>
-            <p class="one-num">
-                <Star class="star" :score=4.5></Star>
-              <span>30</span>
-            </p>
-            <p class="one-rating">看到的扩啦扩绿多多扩绿绿绿绿绿绿绿绿绿啦奥奥打开来得快代课老师</p>
-            <div class="like">
-              <i class="iconfont iconsousuo"></i>
-              <span>南瓜粥</span>
-              <span>皮蛋瘦肉粥</span>
-              <span>扁豆蒙面</span>
-              <span>蚂蚁上树</span>
-              <span>蚂蚁上树</span>
-              <span>蚂蚁上树</span>
-            </div>
-          </div>
-        </div>
-        <div class="rating-one">
-          <img class="one-img" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png">
-          <div class="one-content">
-            <p class="one-one">
-              <span>3****c</span>
-              <span>2016-07-23 21:52:44</span>
-            </p>
-            <p class="one-num">
-                <Star class="star" :score=4.5></Star>
-              <span>30</span>
-            </p>
-            <p class="one-rating">看到的扩啦扩绿多多扩绿绿绿绿绿绿绿绿绿啦奥奥打开来得快代课老师</p>
-            <div class="like">
-              <i class="iconfont iconsousuo"></i>
-              <span>南瓜粥</span>
-              <span>皮蛋瘦肉粥</span>
-              <span>扁豆蒙面</span>
-              <span>蚂蚁上树</span>
-              <span>蚂蚁上树</span>
-              <span>蚂蚁上树</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
     </div>
@@ -142,14 +67,28 @@
 <script>
 import Star from '../../../components/star/star'
 import BScroll from 'better-scroll'
+import {mapState} from 'vuex'
+
 export default {
 components:{
   Star,
 },
 mounted() {
   new BScroll(".rating",{
-    click:true
-  })
+      click:true
+    })
+  this.$store.dispatch('getshopratings')
+},
+computed: {
+  ...mapState(['ratings','info']),
+  
+},
+watch: {
+  ratings(value) {
+    console.log(value)
+    // console.log(this.$store.state.info)
+    // debugger
+  }
 },
 }
 </script>
@@ -236,6 +175,7 @@ mounted() {
           border-radius 3rem
           margin-right 15px
         .one-content
+          flex 1
           .one-one
             position relative
             span:last-child
@@ -246,13 +186,19 @@ mounted() {
               color #A1A7AC
           .one-num
             margin-bottom 10px
+            margin-top 5px
+            &::after
+              content ''
+              height 0
+              display block
+              clear both 
             .star
               margin-right 5px
           .one-rating
             line-height 16px
             margin-bottom 10px
           .like
-            line-height 22px
+            line-height 18px
             span 
               border 1px solid #E5E6E7
               color #B1B5B9
@@ -260,4 +206,6 @@ mounted() {
               padding 0 5px
               margin-right 5px
               white-space nowrap
+              display inline-block
+              margin-bottom 5px
 </style>

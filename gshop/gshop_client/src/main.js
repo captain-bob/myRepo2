@@ -7,6 +7,8 @@ import store from './store/index'
 
 import './assets/iconfont/iconfont.css'
 
+import './mock/mockServer'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

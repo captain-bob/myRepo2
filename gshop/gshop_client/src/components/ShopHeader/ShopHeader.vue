@@ -8,7 +8,7 @@
        <div class="content-box">
           <h1>
               <span class="content-pinpai">品牌</span>
-              <span class="content-title">嘉禾一品新用户下单立</span>
+              <span class="content-title">商品列</span>
               <i class="iconfont iconhoutui"></i>
           </h1>
           <p class="business-situation">

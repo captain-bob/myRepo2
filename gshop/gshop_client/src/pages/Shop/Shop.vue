@@ -21,6 +21,8 @@
 
 <script>
 import ShopHeader from '../../components/ShopHeader/ShopHeader.vue'
+import {mapState} from 'vuex'
+ 
 
 export default {
   data() {
@@ -30,9 +32,13 @@ export default {
   },
   mounted() {
     this.toPage()
+    this.$store.dispatch('getshopinfo')
   },
   components:{
     ShopHeader
+  },
+  computed: {
+     ...mapState(['info'])
   },
   methods: {
     //初始化页面二级导航

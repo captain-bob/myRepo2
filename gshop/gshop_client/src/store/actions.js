@@ -6,10 +6,13 @@ import {
     RECEIVE_ADDRESS,
     RECEIVE_CATEGORYS,
     RECEIVE_SHOPLIST,
-    RECEIVE_USERINFO
+    RECEIVE_USERINFO,
+    RECEIVE_SHOPINFO,
+    RECEIVE_SHOPGOODS,
+    RECEIVE_SHOPRATINGS
 } from './mutation-types'
 
-import { reqAddress, reqcategory,reqshoplist } from '../api/index'
+import { reqAddress, reqcategory,reqshoplist,reqshopgoods,reqshopinfo,reqshopratings } from '../api/index'
 
 export default {
 
@@ -57,21 +60,38 @@ export default {
     //同步记录用户信息
     recorduserinfo({commit},userinfo) {
         commit(RECEIVE_USERINFO,{userinfo})
+    },
+
+    //异步获取商家产品信息
+    async getshopgoods({commit}) {
+        const response = await reqshopgoods()
+        if(response.code===0) {
+            console.log(response)
+            const shopgoods=response.data
+            commit(RECEIVE_SHOPGOODS,{shopgoods})
+        }
+    },
+
+    //异步获取商家评价信息
+    async getshopratings({commit}) {
+        const response = await reqshopratings()
+        if(response.code===0) {
+            console.log(response.data)
+            const shopratings=response.data
+            commit(RECEIVE_SHOPRATINGS,{shopratings})
+        }
+    },
+
+    //异步获取商家详细信息
+    async getshopinfo({commit}) {
+        const response = await reqshopinfo()
+        if(response.code===0) {
+            console.log(response.data)
+            const shopinfo=response.data
+            commit(RECEIVE_SHOPINFO,{shopinfo})
+        }
     }
 
-    // //异步获取手机验证码
-    // async getverificationcode({ commit, state}) {
-    //     // 发送异步ajax请求
-    //     const dat={}
-    //     dat.latitude=state.latitude
-    //     dat.longitude=state.longitude
-        
-    //     const response = await reqshoplist(dat)
-    //     //提交一个mutation
-    //     if (response.code === 0) {
-    //         const shoplist = response.data
-    //         console.log(shoplist)
-    //         commit(RECEIVE_SHOPLIST, { shoplist })
-    //     }
-    // }
+
+    
 }
