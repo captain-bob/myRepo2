@@ -53,10 +53,12 @@ import {mapState} from 'vuex'
 export default {
 mounted() {
     new BScroll(".left-wraper", {
-      click: true
+      click: true,
+      useTransition:false
     });
     new BScroll(".right-wraper", {
-      click: true
+      click: true,
+      useTransition:false
     });
     this.$store.dispatch('getshopgoods')
 },

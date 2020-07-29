@@ -44,6 +44,7 @@
 
 
 <script>
+import ajax from "../../api/ajax";
 import BScroll from "better-scroll";
 
 import Swiper from "swiper";
@@ -70,7 +71,8 @@ export default {
   },
   mounted() {
     new BScroll(".msite_content_wrapper", {
-      click: true
+      click: true,
+      useTransition:false
     });
 
     this.$store.dispatch("getAddress");

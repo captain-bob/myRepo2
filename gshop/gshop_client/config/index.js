@@ -17,12 +17,18 @@ module.exports = {
         pathRewrite: {
           '^/api': ''  //重写路径：去去掉路径中开头的'/api'
         }
-
+      },
+      '/myapi': {  //匹配所有以'/api'开头的请求路径
+        target: 'http://127.0.0.1:8083',//代理目标的基础路径
+        changeOrigin: true, //支持跨域
+        pathRewrite: {
+          '^/myapi': ''  //重写路径：去去掉路径中开头的'/api'
+        }
       }
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '192.168.0.117', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
@@ -52,7 +58,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
